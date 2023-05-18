@@ -4,11 +4,9 @@ SELECT last_name FROM sakila.actor GROUP BY last_name HAVING count(*) = 1;
 
 SELECT last_name FROM sakila.actor GROUP BY last_name HAVING count(*) > 1;
 
-SELECT *, concat(staff_id,' ',rental_id) AS 'concat' FROM sakila.rental;
-
-SELECT count(rental_id) FROM sakila.rental WHERE staff_id='1';
-
-SELECT count(rental_id) FROM sakila.rental WHERE staff_id='2';
+SELECT staff_id, count(rental_id) AS 'rentals'
+FROM sakila.rental
+GROUP BY staff_id;
 
 Select release_year, count(*) from sakila.film group by release_year;
 

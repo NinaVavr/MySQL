@@ -69,14 +69,19 @@ INNER JOIN store AS s
 ON i.store_id = s.store_id
 WHERE f.title = 'Academy Dinosaur' and s.store_id = 1;
 
-SELECT f.title, COUNT(fa.film_id) as actors
-FROM actor AS a 
-INNER JOIN film_actor AS fa
-ON fa.actor_id = a.actor_id
-INNER JOIN film AS f
-ON f.film_id = fa.film_id
-WHERE COUNT(fa.film_id) = 2
-ORDER BY f.title DESC;
+SELECT fa1.film_id, a1.first_name, a2.first_name
+FROM sakila.film
+JOIN sakila.film_actor fa1
+ON film.film_id = fa1.film_id
+JOIN sakila.actor a1
+ON fa1.actor_id = a1.actor_id
+JOIN sakila.film_actor fa2
+ON film.film_id = fa2.film_id
+JOIN sakila.actor a2
+ON fa2.actor_id = a2.actor_id
+WHERE a1.actor_id > a2.actor_id
+GROUP BY a1.actor_id, fa1.film_id, a2.actor_id
+ORDER BY film.film_id;
 
 
 
